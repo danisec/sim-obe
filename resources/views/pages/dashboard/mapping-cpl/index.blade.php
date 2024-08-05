@@ -1,4 +1,4 @@
-<x-layouts.app-dashboard title="{{ $title }}">
+<x-app-dashboard title="{{ $title }}">
 
     <x-molecules.breadcrumb>
         <li aria-current="page">
@@ -61,6 +61,19 @@
                                     </div>
                                 </div>
 
+                                <div x-data="{ showTooltip: false }">
+                                    <a class="font-medium text-blue-600"
+                                        href="{{ route('mappingCpl.edit', $item->id_mapping_cpl) }}"
+                                        @mouseenter="showTooltip = true" @mouseleave="showTooltip = false">
+                                        <x-atoms.svg.pen />
+                                    </a>
+
+                                    <div class="absolute rounded bg-gray-100 px-2 py-1 text-sm text-gray-900"
+                                        x-show="showTooltip">
+                                        <span>Ubah</span>
+                                    </div>
+                                </div>
+
                                 <div x-data="{ isOpen: false }">
                                     <button class="text-red-600 focus:outline-none" type="button"
                                         @click="isOpen = true">
@@ -91,4 +104,4 @@
         {{ $mappingCapaianPembelajaranLulusan->links('vendor.pagination.tailwind') }}
     </div>
 
-</x-layouts.app-dashboard>
+</x-app-dashboard>
