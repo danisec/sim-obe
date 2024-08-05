@@ -32,4 +32,39 @@
         @apply block rounded-lg border border-indigo-50 bg-indigo-50 p-2.5 text-base text-gray-900 focus:border-indigo-600 focus:ring-indigo-600;
     }
 
+    /* Fixed sticky table */
+    .sticky {
+        position: -webkit-sticky;
+        position: sticky;
+    }
+
+    .left-0 {
+        left: 0;
+    }
+
+    .left-100px {
+        left: 100px;
+    }
+
+    /* Scroll on top table */
+    #wrapper-first-scroll,
+    #wrapper-second-scroll {
+        width: auto;
+        border: none 0px RED;
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+
+    #wrapper-scroll {
+        height: auto;
+    }
+
+    #wrapper-second-scroll {
+        height: auto;
+    }
+
+    #div-scroll {
+        width: 1500px;
+        height: 20px;
+    }
 }
