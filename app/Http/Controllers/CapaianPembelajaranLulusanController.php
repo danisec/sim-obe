@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\ImportData;
 use App\Models\CapaianPembelajaranLulusan;
+use App\Models\MataKuliah;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -48,6 +49,8 @@ class CapaianPembelajaranLulusanController extends Controller
             'import_file' => 'required|mimes:xlsx,xls',
         ]);
 
+        // MataKuliah::query()->delete();
+
         $file = $request->file('import_file')->store('temp');
 
         // Mengimport data dari file excel ke setiap tabel
@@ -64,7 +67,7 @@ class CapaianPembelajaranLulusanController extends Controller
     {
         return view('pages.dashboard.cpl-cpmk-scpmk.show', [
             'title' => 'Detail CPL-CPMK-SCPMK',
-            'cplCpmkScpmk' => CapaianPembelajaranLulusan::with('capaianPembelajaranMatakuliah.subCapaianPembelajaranMataKuliah')->where('id_cpl', $id)->first(),
+            'cplCpmkScpmk' => CapaianPembelajaranLulusan::with('capaianPembelajaranMatakuliah.subCapaianPembelajaranMataKuliah.mataKuliah')->where('id_cpl', $id)->first(),
         ]);
     }
 
