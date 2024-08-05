@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\HasilPembelajaranImport;
+use App\Models\CapaianPembelajaranLulusan;
 use App\Models\HasilPembelajaran;
 use App\Models\MappingCapaianPembelajaranLulusan;
 use App\Models\ScoreCPL;
@@ -19,7 +20,6 @@ class HasilPembelajaranController extends Controller
     public function index()
     {
         $totalHasilPembelajaran = HasilPembelajaran::with('totalHasilPembelajaran')->get();
-        // dd($totalHasilPembelajaran);
 
         $totalArray = [];
         foreach ($totalHasilPembelajaran as $item) {
@@ -31,12 +31,40 @@ class HasilPembelajaranController extends Controller
             $totalArray[$kodeMK] = $total;
         }
 
-        // dd($totalArray);
+        // Cari kode_mata_kuliah berada di cpl mana saja
+        $cplKodeMataKuliah = HasilPembelajaran::with(['mataKuliah.subCapaianPembelajaranMataKuliah.capaianPembelajaranMataKuliah.capaianPembelajaranLulusan'])->get();
+
+        // Dapatkan kode_cpl dari $cplKodeMataKuliah
+        $kodeCPL = [];
+        foreach ($cplKodeMataKuliah as $item) {
+            $kode_mata_kuliah = $item->kode_mata_kuliah;
+
+            foreach (
+                $item->mataKuliah->pluck('subCapaianPembelajaranMataKuliah')->flatten()
+                ->pluck('capaianPembelajaranMataKuliah')->flatten()
+                ->pluck('capaianPembelajaranLulusan')->flatten()
+                ->pluck('kode_cpl')->toArray()
+                as $value
+            ) {
+                $kodeCPL[$kode_mata_kuliah][] = $value;
+            }
+        }
+
+        // Mengambil hanya nilai yang unik
+        foreach ($kodeCPL as $kode_mata_kuliah => $values) {
+            $kodeCPL[$kode_mata_kuliah] = array_unique($values);
+        }
+
+        $allCplCodes = array_unique(array_merge(...array_values($kodeCPL)));
+        sort($allCplCodes);
 
         return view('pages.dashboard.hasil-pembelajaran.index', [
             'title' => 'Hasil Pembelajaran',
             'hasilPembelajaran' => HasilPembelajaran::orderBy('kode_mata_kuliah', 'asc')->filter(request(['search']))->paginate(10)->withQueryString(),
             'totalHasilPembelajaran' => $totalArray,
+            'capaianPembelajaranLulusan' => CapaianPembelajaranLulusan::all(),
+            'allCplCodes' => $allCplCodes,
+            'kodeCPL' => $kodeCPL,
         ]);
     }
 
@@ -45,13 +73,9 @@ class HasilPembelajaranController extends Controller
      */
     public function create()
     {
-        $kodeMataKuliah = MappingCapaianPembelajaranLulusan::all()->pluck('kode_mata_kuliah');
-        $namaMataKuliah = MappingCapaianPembelajaranLulusan::all()->pluck('nama_mata_kuliah');
-
         return view('pages.dashboard.hasil-pembelajaran.create', [
-            'title' => 'Create Hasil Pembelajaran',
-            'kodeMataKuliah' => $kodeMataKuliah,
-            'namaMataKuliah' => $namaMataKuliah,
+            'title' => 'Tambah Hasil Pembelajaran',
+            'mataKuliah' => MappingCapaianPembelajaranLulusan::all(),
         ]);
     }
 
@@ -246,12 +270,12 @@ class HasilPembelajaranController extends Controller
 
     /**
      * Display a listing of the resource.
-     * @params string $kodeCpl
+     * @params string $kodeMataKuliah
      */
     public function getMataKuliah($kodeMataKuliah)
     {
-        $hasilPembelajaran = HasilPembelajaran::where('kode_mata_kuliah', $kodeMataKuliah)->get();
+        $mappingCpl = MappingCapaianPembelajaranLulusan::where('kode_mata_kuliah', $kodeMataKuliah)->get();
 
-        return response()->json($hasilPembelajaran);
+        return response()->json($mappingCpl);
     }
 }
