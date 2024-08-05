@@ -2,26 +2,19 @@
 
 namespace App\View\Components\organism;
 
-use Closure;
-use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class Aside extends Component
 {
+    public $sideNavDashboard;
+    public $sideNav;
+
     /**
      * Create a new component instance.
      */
     public function __construct()
     {
-        //
-    }
-
-    /**
-     * Get the view / contents that represent the component.
-     */
-    public function render(): View|Closure|string
-    {
-        $sideNavDashboard= [
+        $this->sideNavDashboard= [
             'Dashboard' => [
                 'url' => '',
                 'viewBox' => '0 0 24 24',
@@ -33,7 +26,7 @@ class Aside extends Component
             ],
         ];
 
-        $sideNav= [
+        $this->sideNav= [
             'CPL - CPMK - SCPMK' => [
                 'url' => 'data-cpl-cpmk-scpmk',
                 'viewBox' => '0 0 24 24',
@@ -65,7 +58,16 @@ class Aside extends Component
                 ],
             ],
         ];
-        
-        return view('components.organism.aside', compact('sideNavDashboard', 'sideNav'));
+    }
+
+    /**
+     * Get the view / contents that represent the component.
+     */
+    public function render()
+    {       
+        return view('components.organism.aside',[
+            'sideNavDashboard' => $this->sideNavDashboard,
+            'sideNav' => $this->sideNav,
+        ]);
     }
 }
