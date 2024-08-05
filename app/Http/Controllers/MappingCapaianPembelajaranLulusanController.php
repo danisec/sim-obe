@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\CapaianPembelajaranLulusan;
 use App\Models\CapaianPembelajaranMataKuliah;
+use App\Models\IndikatorKinerjaScpmk;
 use App\Models\MappingCapaianPembelajaranLulusan;
+use App\Models\MataKuliah;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MappingCapaianPembelajaranLulusanController extends Controller
 {
@@ -26,8 +29,9 @@ class MappingCapaianPembelajaranLulusanController extends Controller
     public function create()
     {
         return view('pages.dashboard.mapping-cpl.create', [
-            'title' => 'Create Mapping CPL',
+            'title' => 'Tambah Mapping CPL',
             'capaianPembelajaranLulusan' => CapaianPembelajaranLulusan::all(),
+            'kodeMataKuliah' => MataKuliah::select('kode_mata_kuliah', 'nama_mata_kuliah')->get()->unique('kode_mata_kuliah'),
         ]);
     }
 
@@ -77,12 +81,43 @@ class MappingCapaianPembelajaranLulusanController extends Controller
             return back()->withInput()->with('notif', $notif);
         }
 
+        DB::beginTransaction();
+
         try {
-            MappingCapaianPembelajaranLulusan::create($validatedData);
+            $mappingCpl = MappingCapaianPembelajaranLulusan::create($validatedData);
+            $idMappingCpl = $mappingCpl->id_mapping_cpl;
+
+            $validatedIndikatorKinerjaScpmk = $request->validate([
+                'nama_indikator' => 'array',
+                'indikator_kode_scpmk' => 'array',
+            ]);
+
+            // Pastikan panjang array sesuai
+            if (count($validatedIndikatorKinerjaScpmk['nama_indikator']) !== count($validatedIndikatorKinerjaScpmk['indikator_kode_scpmk'])) {
+                throw new \Exception('Panjang array nama indikator dan indikator kode scpmk tidak sesuai');
+            }
+
+            $indikatorKinerjaScpmk = [];
+            foreach ($validatedIndikatorKinerjaScpmk['nama_indikator'] as $key => $value) {
+                $indikatorKinerjaScpmk[] = [
+                    'id_indikator_kinerja_scpmk' => (string) \Str::uuid(),
+                    'id_mapping_cpl' => $idMappingCpl,
+                    'nama_indikator' => $value,
+                    'indikator_kode_scpmk' => $validatedIndikatorKinerjaScpmk['indikator_kode_scpmk'][$key],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+            }
+            
+            IndikatorKinerjaScpmk::insert($indikatorKinerjaScpmk);
+
+            DB::commit();
 
             $notif = notify()->success('Data mapping cpl mata kuliah berhasil disimpan');
             return redirect()->route('mappingCpl.index')->with('notif', $notif);
         } catch (\Throwable $th) {
+            DB::rollback();
+
             $notif = notify()->error('Terjadi kesalahan saat menyimpan data mapping cpl');
             return back()->withInput()->with('notif', $notif);
         }
@@ -95,7 +130,7 @@ class MappingCapaianPembelajaranLulusanController extends Controller
     {
         return view('pages.dashboard.mapping-cpl.show', [
             'title' => 'Detail Mapping CPL',
-            'mappingCpl' => MappingCapaianPembelajaranLulusan::where('id_mapping_cpl', $id)->first(),
+            'mappingCpl' => MappingCapaianPembelajaranLulusan::with(['indikatorKinerjaScpmk'])->where('id_mapping_cpl', $id)->first(),
         ]);
     }
 
@@ -104,7 +139,10 @@ class MappingCapaianPembelajaranLulusanController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('pages.dashboard.mapping-cpl.edit', [
+            'title' => 'Ubah Mapping CPL',
+            'mappingCpl' => MappingCapaianPembelajaranLulusan::with(['indikatorKinerjaScpmk'])->where('id_mapping_cpl', $id)->first(),
+        ]);
     }
 
     /**
@@ -112,7 +150,84 @@ class MappingCapaianPembelajaranLulusanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'kode_mata_kuliah' => '',
+            'nama_mata_kuliah' => '',
+            'kode_cpl' => '',
+            'kode_cpmk' => '',
+            'kode_scpmk' => '',
+            'partisipasi' => '',
+            'proyek' => '',
+            'tugas' => '',
+            'kuis' => '',
+            'evaluasi_tengah_semester' => '',
+            'evaluasi_akhir_semester' => '',
+        ]);
+
+        // Hitung total bobot
+        $totalBobot = (
+            $request->input('partisipasi', 0) +
+            $request->input('proyek', 0) +
+            $request->input('tugas', 0) +
+            $request->input('kuis', 0) +
+            $request->input('evaluasi_tengah_semester', 0) +
+            $request->input('evaluasi_akhir_semester', 0)
+        );
+
+        // Cek apakah total bobot di atas atau di bawah 100
+        if ($totalBobot > 100) {
+            $notif = notify()->warning('Total bobot melebihi 100%');
+            return back()->withInput()->with('notif', $notif);
+        } elseif ($totalBobot < 100) {
+            $notif = notify()->warning('Total bobot kurang dari 100%');
+            return back()->withInput()->with('notif', $notif);
+        }
+
+        DB::beginTransaction();
+
+        try {
+            // Update data di tabel mapping_cpl
+            $mappingCpl = MappingCapaianPembelajaranLulusan::findOrFail($id);
+            $mappingCpl->update($validatedData);
+
+            $validatedIndikatorKinerjaScpmk = $request->validate([
+                'nama_indikator' => 'array',
+                'indikator_kode_scpmk' => 'array',
+            ]);
+
+            // Pastikan panjang array sesuai
+            if (count($validatedIndikatorKinerjaScpmk['nama_indikator']) !== count($validatedIndikatorKinerjaScpmk['indikator_kode_scpmk'])) {
+                throw new \Exception('Panjang array nama indikator dan indikator kode scpmk tidak sesuai');
+            }
+
+            // Hapus data indikator_kinerja_scpmk yang lama
+            IndikatorKinerjaScpmk::where('id_mapping_cpl', $id)->delete();
+
+            $indikatorKinerjaScpmk = [];
+            foreach ($validatedIndikatorKinerjaScpmk['nama_indikator'] as $key => $value) {
+                $indikatorKinerjaScpmk[] = [
+                    'id_indikator_kinerja_scpmk' => (string) \Str::uuid(),
+                    'id_mapping_cpl' => $id,
+                    'nama_indikator' => $value,
+                    'indikator_kode_scpmk' => $validatedIndikatorKinerjaScpmk['indikator_kode_scpmk'][$key],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+            }
+
+            // Insert data indikator_kinerja_scpmk yang baru
+            IndikatorKinerjaScpmk::insert($indikatorKinerjaScpmk);
+
+            DB::commit();
+
+            $notif = notify()->success('Data mapping cpl mata kuliah berhasil diubah');
+            return redirect()->route('mappingCpl.edit', $id)->with('notif', $notif);
+        } catch (\Throwable $th) {
+            DB::rollback();
+
+            $notif = notify()->error('Terjadi kesalahan saat mengubah data mapping cpl');
+            return back()->withInput()->with('notif', $notif);
+        }
     }
 
     /**
@@ -129,6 +244,17 @@ class MappingCapaianPembelajaranLulusanController extends Controller
             $notif = notify()->error('Terjadi kesalahan saat menghapus data mapping cpl');
             return back()->with('notif', $notif);
         }
+    }
+
+    /**
+     * Display a listing of the resource.
+     * @params string $kodeMataKuliah
+     */
+    public function getNamaMataKuliah($kodeMataKuliah)
+    {
+        $namaMataKuliah = MataKuliah::where('kode_mata_kuliah', $kodeMataKuliah)->first();
+
+        return response()->json($namaMataKuliah);
     }
 
     /**
@@ -151,5 +277,17 @@ class MappingCapaianPembelajaranLulusanController extends Controller
         $capaianPembelajaranMataKuliah = CapaianPembelajaranMataKuliah::with('subCapaianPembelajaranMatakuliah')->where('kode_cpmk', $kodeCpmk)->get();
 
         return response()->json($capaianPembelajaranMataKuliah);
+    }
+
+    /**
+     * Display a listing of the resource.
+     * @params string $kodeMataKuliah
+     */
+    public function getIndikatorScpmk($kodeMataKuliah)
+    {
+        // Cari kode mata kuliah dalam table mata_kuliah berelasi dengan sub_capaian_pembelajaran_mata_kuliah berada di scpmk mana saja
+        $getScpmkByKodeMataKuliah = MataKuliah::with('subCapaianPembelajaranMatakuliah')->where('kode_mata_kuliah', $kodeMataKuliah)->get();
+
+        return response()->json($getScpmkByKodeMataKuliah);
     }
 }
