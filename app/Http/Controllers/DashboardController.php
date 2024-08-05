@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CapaianPembelajaranLulusan;
 use App\Models\Dashboard;
 use App\Models\ScoreCPL;
 use Illuminate\Http\Request;
@@ -32,11 +33,22 @@ class DashboardController extends Controller
             ],
         ];
 
+        $getCpl = CapaianPembelajaranLulusan::with(['capaianPembelajaranMatakuliah.subCapaianPembelajaranMataKuliah'])->get();
+
+        // Dapatkan kode_cpl, deskripsi_cpl
+        $cpl = [];
+        foreach ($getCpl as $key => $value) {
+            $cpl[$key]['kode_cpl'] = $value->kode_cpl;
+            $cpl[$key]['deskripsi_cpl'] = $value->deskripsi_cpl;
+            $cpl[$key]['aspek'] = $value->capaianPembelajaranMatakuliah->pluck('subCapaianPembelajaranMataKuliah')->flatten()->pluck('aspek')->unique()->toArray();
+            $cpl[$key]['kemampuan'] = $value->capaianPembelajaranMatakuliah->pluck('subCapaianPembelajaranMataKuliah')->flatten()->pluck('kemampuan')->toArray();
+        }
+
+
         $scoreCPLData = ScoreCPL::all();
 
         // Buat array baru untuk $scoreCPL
         $scoreCPL = [];
-
         foreach ($scoreCPLData as $score) {
             $column = $score->column;
             $scoreValue = $score->score;
@@ -45,10 +57,25 @@ class DashboardController extends Controller
             $scoreCPL[$column] = $scoreValue;
         }
 
+        // Masukkan skor CPL ke dalam array CPL berdasarkan kode_cpl
+        foreach ($cpl as $key => $cplItem) {
+            $kodeCPL = $cplItem['kode_cpl'];
+
+            // Cek jika kode_cpl ada dalam array scoreCPL
+            if (isset($scoreCPL[$kodeCPL])) {
+                // Masukkan nilai skor ke dalam array cpl
+                $cpl[$key]['score'] = $scoreCPL[$kodeCPL];
+            } else {
+                // Jika tidak ada skor, set nilai skor menjadi 0 atau nilai default lainnya
+                $cpl[$key]['score'] = 0;
+            }
+        }
+
         return view('pages.dashboard.home.index', [
             'title' => 'Dashboard',
             'scoreCPL' => $scoreCPL,
             'predikatCPL' => $predikatCPL,
+            'cpl' => $cpl,
         ]);
     }
 
