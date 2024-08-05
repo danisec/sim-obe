@@ -16,7 +16,7 @@ $(document).ready(function () {
                 $("#kodeCpmk").empty();
 
                 let option = $("<option>", {
-                    text: "Pilih Kode CPL",
+                    text: "Pilih Kode CPMK",
                     selected: true,
                     hidden: true,
                     disabled: true,
