@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('total_hasil_pembelajaran', function (Blueprint $table) {
-            $table->id('id_total_hasil_pembelajaran');
-            $table->unsignedBigInteger('id_hasil_pembelajaran');
+            $table->uuid('id_total_hasil_pembelajaran')->primary();
+            $table->uuid('id_hasil_pembelajaran');
             $table->double('total');
             $table->timestamps();
         });
