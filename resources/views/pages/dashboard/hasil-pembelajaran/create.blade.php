@@ -1,4 +1,4 @@
-<x-layouts.app-dashboard title="{{ $title }}">
+<x-app-dashboard title="{{ $title }}">
 
     <x-molecules.breadcrumb>
         <li aria-current="page">
@@ -12,7 +12,7 @@
         <li aria-current="page">
             <div class="flex items-center">
                 <x-atoms.svg.arrow-right />
-                <span class="mx-2 text-base font-medium text-gray-500">Add Hasil Pembelajaran</span>
+                <span class="mx-2 text-base font-medium text-gray-500">Tambah Hasil Pembelajaran</span>
             </div>
         </li>
     </x-molecules.breadcrumb>
@@ -60,9 +60,10 @@
                     id="kodeMataKuliah" name="kode_mata_kuliah" required>
                     <option selected disabled hidden>Pilih Kode Mata Kuliah</option>
 
-                    @foreach ($kodeMataKuliah as $item)
-                        <option value="{{ $item }}" {{ old('kode_mata_kuliah') == $item ? 'selected' : '' }}>
-                            {{ $item }}
+                    @foreach ($mataKuliah as $itemMataKuliah)
+                        <option value="{{ $itemMataKuliah->kode_mata_kuliah }}"
+                            {{ old('kode_mata_kuliah') == $itemMataKuliah->kode_mata_kuliah ? 'selected' : '' }}>
+                            {{ $itemMataKuliah->kode_mata_kuliah . ' - ' . $itemMataKuliah->nama_mata_kuliah }}
                         </option>
                     @endforeach
                 </select>
@@ -110,4 +111,4 @@
         </form>
     </div>
 
-</x-layouts.app-dashboard>
+</x-app-dashboard>
