@@ -1,4 +1,4 @@
-<x-layouts.app-dashboard title="{{ $title }}">
+<x-app-dashboard title="{{ $title }}">
 
     <x-molecules.breadcrumb>
         <li aria-current="page">
@@ -82,6 +82,9 @@
                             <th class="px-6 py-3" scope="col">
                                 Bobot (%)
                             </th>
+                            <th class="px-6 py-3" scope="col">
+                                Kode SCPMK
+                            </th>
                         </tr>
                     </thead>
 
@@ -91,10 +94,22 @@
                                 Partisipasi / Case Method
                             </th>
                             <td class="px-6 py-4">
-                                <input
-                                    class="@error('partisipasi') border-red-500 @enderror field-input-slate w-full capitalize"
-                                    name="partisipasi" type="text"
+                                <input class="field-input-slate w-full capitalize" name="partisipasi" type="text"
                                     value="{{ $mappingCpl->partisipasi ? $mappingCpl->partisipasi : '' }}"
+                                    @disabled(true) @readonly(true) />
+                            </td>
+                            <td class="px-6 py-4">
+                                @php
+                                    // Cek apakah ada item yang nama_indikator sama dengan 'partisipasi'
+                                    $indikatorKinerja = $mappingCpl->indikatorKinerjaScpmk->firstWhere(
+                                        'nama_indikator',
+                                        'partisipasi',
+                                    );
+                                @endphp
+
+                                <input class="field-input-slate w-full capitalize" name="indikator_kode_scpmk"
+                                    type="text"
+                                    value="{{ $indikatorKinerja ? $indikatorKinerja->indikator_kode_scpmk : '' }}"
                                     @disabled(true) @readonly(true) />
                             </td>
                         </tr>
@@ -110,6 +125,20 @@
                                     value="{{ $mappingCpl->proyek ? $mappingCpl->proyek : '' }}"
                                     @disabled(true) @readonly(true) />
                             </td>
+                            <td class="px-6 py-4">
+                                @php
+                                    // Cek apakah ada item yang nama_indikator sama dengan 'proyek'
+                                    $indikatorKinerja = $mappingCpl->indikatorKinerjaScpmk->firstWhere(
+                                        'nama_indikator',
+                                        'proyek',
+                                    );
+                                @endphp
+
+                                <input class="field-input-slate w-full capitalize" name="indikator_kode_scpmk"
+                                    type="text"
+                                    value="{{ $indikatorKinerja ? $indikatorKinerja->indikator_kode_scpmk : '' }}"
+                                    @disabled(true) @readonly(true) />
+                            </td>
                         </tr>
 
                         <tr class="border-b bg-white hover:bg-slate-100">
@@ -121,6 +150,20 @@
                                     class="@error('tugas') border-red-500 @enderror field-input-slate w-full capitalize"
                                     name="tugas" type="text"
                                     value="{{ $mappingCpl->tugas ? $mappingCpl->tugas : '' }}"
+                                    @disabled(true) @readonly(true) />
+                            </td>
+                            <td class="px-6 py-4">
+                                @php
+                                    // Cek apakah ada item yang nama_indikator sama dengan 'tugas'
+                                    $indikatorKinerja = $mappingCpl->indikatorKinerjaScpmk->firstWhere(
+                                        'nama_indikator',
+                                        'tugas',
+                                    );
+                                @endphp
+
+                                <input class="field-input-slate w-full capitalize" name="indikator_kode_scpmk"
+                                    type="text"
+                                    value="{{ $indikatorKinerja ? $indikatorKinerja->indikator_kode_scpmk : '' }}"
                                     @disabled(true) @readonly(true) />
                             </td>
                         </tr>
@@ -136,6 +179,20 @@
                                     value="{{ $mappingCpl->kuis ? $mappingCpl->kuis : '' }}"
                                     @disabled(true) @readonly(true) />
                             </td>
+                            <td class="px-6 py-4">
+                                @php
+                                    // Cek apakah ada item yang nama_indikator sama dengan 'kuis'
+                                    $indikatorKinerja = $mappingCpl->indikatorKinerjaScpmk->firstWhere(
+                                        'nama_indikator',
+                                        'kuis',
+                                    );
+                                @endphp
+
+                                <input class="field-input-slate w-full capitalize" name="indikator_kode_scpmk"
+                                    type="text"
+                                    value="{{ $indikatorKinerja ? $indikatorKinerja->indikator_kode_scpmk : '' }}"
+                                    @disabled(true) @readonly(true) />
+                            </td>
                         </tr>
 
                         <tr class="border-b bg-white hover:bg-slate-100">
@@ -147,6 +204,20 @@
                                     class="@error('evaluasi_tengah_semester') border-red-500 @enderror field-input-slate w-full capitalize"
                                     name="evaluasi_tengah_semester" type="text"
                                     value="{{ $mappingCpl->evaluasi_tengah_semester ? $mappingCpl->evaluasi_tengah_semester : '' }}"
+                                    @disabled(true) @readonly(true) />
+                            </td>
+                            <td class="px-6 py-4">
+                                @php
+                                    // Cek apakah ada item yang nama_indikator sama dengan 'evaluasi_tengah_semester'
+                                    $indikatorKinerja = $mappingCpl->indikatorKinerjaScpmk->firstWhere(
+                                        'nama_indikator',
+                                        'evaluasi_tengah_semester',
+                                    );
+                                @endphp
+
+                                <input class="field-input-slate w-full capitalize" name="indikator_kode_scpmk"
+                                    type="text"
+                                    value="{{ $indikatorKinerja ? $indikatorKinerja->indikator_kode_scpmk : '' }}"
                                     @disabled(true) @readonly(true) />
                             </td>
                         </tr>
@@ -162,6 +233,20 @@
                                     value="{{ $mappingCpl->evaluasi_akhir_semester ? $mappingCpl->evaluasi_akhir_semester : '' }}"
                                     @disabled(true) @readonly(true) />
                             </td>
+                            <td class="px-6 py-4">
+                                @php
+                                    // Cek apakah ada item yang nama_indikator sama dengan 'evaluasi_akhir_semester'
+                                    $indikatorKinerja = $mappingCpl->indikatorKinerjaScpmk->firstWhere(
+                                        'nama_indikator',
+                                        'evaluasi_akhir_semester',
+                                    );
+                                @endphp
+
+                                <input class="field-input-slate w-full capitalize" name="indikator_kode_scpmk"
+                                    type="text"
+                                    value="{{ $indikatorKinerja ? $indikatorKinerja->indikator_kode_scpmk : '' }}"
+                                    @disabled(true) @readonly(true) />
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -175,4 +260,4 @@
         </div>
     </div>
 
-</x-layouts.app-dashboard>
+</x-app-dashboard>
