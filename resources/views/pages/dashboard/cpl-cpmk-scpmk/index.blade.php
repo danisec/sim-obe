@@ -1,4 +1,4 @@
-<x-layouts.app-dashboard title="{{ $title }}">
+<x-app-dashboard title="{{ $title }}">
 
     <x-molecules.breadcrumb>
         <li aria-current="page">
@@ -15,7 +15,7 @@
         <div class="flex flex-row items-center justify-end">
             <div>
                 <a href="{{ route('capaianPembelajaran.import') }}">
-                    <x-atoms.button.button-primary :customClass="'h-12 w-32 rounded-md'" :type="'button'" :name="'Tambah'" />
+                    <x-atoms.button.button-primary :customClass="'h-12 w-32 rounded-md'" :type="'button'" :name="'Import'" />
                 </a>
             </div>
         </div>
@@ -91,4 +91,4 @@
         {{ $capaianPembelajaranLulusan->links('vendor.pagination.tailwind') }}
     </div>
 
-</x-layouts.app-dashboard>
+</x-app-dashboard>
