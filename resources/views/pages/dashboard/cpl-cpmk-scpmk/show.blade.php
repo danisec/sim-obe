@@ -1,4 +1,4 @@
-<x-layouts.app-dashboard title="{{ $title }}">
+<x-app-dashboard title="{{ $title }}">
 
     <x-molecules.breadcrumb>
         <li aria-current="page">
@@ -17,85 +17,111 @@
         </li>
     </x-molecules.breadcrumb>
 
-    <div class="mx-auto my-8 w-11/12">
+    <div class="mx-auto my-8 w-full">
 
-        <h4 class="mb-6 text-2xl font-semibold text-gray-900">Detail CPL-CPMK-SCPMK
-        </h4>
+        <h4 class="mb-6 text-2xl font-semibold text-gray-900">Detail CPL-CPMK-SCPMK</h4>
 
-        <div class="mt-8 space-y-6">
-
-            <h4 class="mb-6 text-xl font-semibold text-gray-900">Capaian Pembelajaran Lulusan
-            </h4>
-
-            <div>
-                <label class="mb-2 block text-base font-medium text-gray-900" for="kode cpl">
-                    Kode CPL
-                </label>
-                <input class="@error('kode_cpl') border-red-500 @enderror field-input-slate w-full capitalize"
-                    name="kode_cpl" type="text" value="{{ $cplCpmkScpmk->kode_cpl }}" @disabled(true)
-                    @readonly(true) />
+        <div id="wrapper-first-scroll">
+            <div id="div-scroll">
             </div>
+        </div>
 
-            <div>
-                <label class="mb-2 block text-base font-medium text-gray-900" for="deskripsi cpl">
-                    Deskripsi CPL
-                </label>
-                <textarea class="textAreaHeight field-input-slate w-full" name="deskripsi_cpl" type="text" rows="3"
-                    @disabled(true) @readonly(true)>{{ $cplCpmkScpmk->deskripsi_cpl }}</textarea>
-            </div>
+        <div class="overflow-x-auto" id="wrapper-second-scroll">
+            <table class="min-w-full border-collapse border border-gray-300">
+                <thead class="bg-slate-100 text-sm uppercase text-gray-900">
+                    <tr>
+                        <th class="sticky left-0 border border-gray-300 bg-slate-100 px-6 py-3">Kode CPL</th>
+                        <th class="sticky left-[100px] border border-gray-300 bg-slate-100 px-6 py-3">Deskripsi CPL
+                        </th>
+                        <th class="border border-gray-300 px-6 py-3">Kode CPMK</th>
+                        <th class="border border-gray-300 px-6 py-3">Deskripsi CPMK</th>
+                        <th class="border border-gray-300 px-6 py-3">Kode SCPMK</th>
+                        <th class="border border-gray-300 px-6 py-3">Deskripsi SCPMK</th>
+                        <th class="border border-gray-300 px-6 py-3">Kemampuan</th>
+                        <th class="border border-gray-300 px-6 py-3">Aspek</th>
+                        <th class="border border-gray-300 px-6 py-3">Nama Mata Kuliah</th>
+                    </tr>
+                </thead>
 
-            <h4 class="mb-6 text-xl font-semibold text-gray-900">Capaian Pembelajaran Mata Kuliah
-            </h4>
+                <tbody class="text-base text-gray-900">
+                    @php
+                        $totalRowspan = 0;
+                    @endphp
+                    @foreach ($cplCpmkScpmk->capaianPembelajaranMataKuliah as $itemCPMK)
+                        @php
+                            $totalRowspan += count($itemCPMK->subCapaianPembelajaranMataKuliah);
+                        @endphp
+                    @endforeach
 
-            @foreach ($cplCpmkScpmk->capaianPembelajaranMataKuliah as $itemCPMK)
-                <div>
-                    <label class="mb-2 block text-base font-medium text-gray-900" for="kode cpmk">
-                        Kode CPMK
-                    </label>
-                    <input class="@error('kode_cpmk') border-red-500 @enderror field-input-slate w-full capitalize"
-                        name="kode_cpmk" type="text" value="{{ $itemCPMK->kode_cpmk }}" @disabled(true)
-                        @readonly(true) />
-                </div>
+                    @php
+                        $firstCPL = true;
+                    @endphp
 
-                <div>
-                    <label class="mb-2 block text-base font-medium text-gray-900" for="deskripsi cpmk">
-                        Deskripsi CPMK
-                    </label>
-                    <textarea class="textAreaHeight field-input-slate w-full" name="deskripsi_cpmk" type="text" rows="3"
-                        @disabled(true) @readonly(true)>{{ $itemCPMK->deskripsi_cpmk }}</textarea>
-                </div>
-            @endforeach
+                    @foreach ($cplCpmkScpmk->capaianPembelajaranMataKuliah as $itemCPMK)
+                        @php
+                            $rowSpanCPMK = count($itemCPMK->subCapaianPembelajaranMataKuliah) ?: 1;
+                        @endphp
+                        @foreach ($itemCPMK->subCapaianPembelajaranMataKuliah as $indexSCPMK => $itemSCPMK)
+                            <tr class="bg-white hover:bg-slate-100">
+                                @if ($firstCPL)
+                                    <td class="sticky left-0 border border-gray-300 bg-white px-6 py-4"
+                                        rowspan="{{ $totalRowspan }}">
+                                        {{ $cplCpmkScpmk->kode_cpl }}
+                                    </td>
+                                    <td class="sticky left-[100px] border border-gray-300 bg-white px-6 py-4"
+                                        rowspan="{{ $totalRowspan }}">
+                                        {{ $cplCpmkScpmk->deskripsi_cpl }}
+                                    </td>
+                                    @php
+                                        $firstCPL = false;
+                                    @endphp
+                                @endif
+                                @if ($indexSCPMK === 0)
+                                    <td class="border border-gray-300 px-2 py-4" rowspan="{{ $rowSpanCPMK }}">
+                                        {{ $itemCPMK->kode_cpmk }}
+                                    </td>
+                                    <td class="border border-gray-300 px-2 py-4" rowspan="{{ $rowSpanCPMK }}">
+                                        {{ $itemCPMK->deskripsi_cpmk }}
+                                    </td>
+                                @endif
+                                <td class="border border-gray-300 px-2 py-4">{{ $itemSCPMK->kode_scpmk }}</td>
+                                <td class="border border-gray-300 px-2 py-4">{{ $itemSCPMK->deskripsi_scpmk }}</td>
+                                <td class="border border-gray-300 px-2 py-4">{{ $itemSCPMK->kemampuan }}</td>
+                                <td class="border border-gray-300 px-2 py-4">{{ $itemSCPMK->aspek }}</td>
+                                <td class="border border-gray-300 px-0 py-4">
+                                    <div class="w-full divide-y divide-gray-300">
+                                        @foreach ($itemSCPMK->mataKuliah as $mataKuliah)
+                                            <div class="px-6 py-1">
+                                                {{ $mataKuliah->nama_mata_kuliah }}
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                        @if ($rowSpanCPMK === 0)
+                            <tr class="bg-white hover:bg-slate-100">
+                                <td class="border border-gray-300 px-6 py-4">{{ $cplCpmkScpmk->kode_cpl }}</td>
+                                <td class="border border-gray-300 px-6 py-4">{{ $cplCpmkScpmk->deskripsi_cpl }}</td>
+                                <td class="border border-gray-300 px-6 py-4">{{ $itemCPMK->kode_cpmk }}</td>
+                                <td class="border border-gray-300 px-6 py-4">{{ $itemCPMK->deskripsi_cpmk }}</td>
+                                <td class="border border-gray-300 px-6 py-4"></td>
+                                <td class="border border-gray-300 px-6 py-4"></td>
+                                <td class="border border-gray-300 px-6 py-4"></td>
+                                <td class="border border-gray-300 px-6 py-4"></td>
+                                <td class="border border-gray-300 px-6 py-4"></td>
+                            </tr>
+                        @endif
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
-            <h4 class="mb-6 text-xl font-semibold text-gray-900">Sub Capaian Pembelajaran Mata Kuliah
-            </h4>
-
-            @foreach ($cplCpmkScpmk->capaianPembelajaranMataKuliah as $itemCPMK)
-                @foreach ($itemCPMK->subCapaianPembelajaranMataKuliah as $itemSCPMK)
-                    <div>
-                        <label class="mb-2 block text-base font-medium text-gray-900" for="kode scpmk">
-                            Kode SCPMK
-                        </label>
-                        <input class="@error('kode_scpmk') border-red-500 @enderror field-input-slate w-full capitalize"
-                            name="kode_scpmk" type="text" value="{{ $itemSCPMK->kode_scpmk }}"
-                            @disabled(true) @readonly(true) />
-                    </div>
-
-                    <div>
-                        <label class="mb-2 block text-base font-medium text-gray-900" for="deskripsi scpmk">
-                            Deskripsi SCPMK
-                        </label>
-                        <textarea class="textAreaHeight field-input-slate w-full" name="deskripsi_scpmk" type="text" rows="3"
-                            @disabled(true) @readonly(true)>{{ $itemSCPMK->deskripsi_scpmk }}</textarea>
-                    </div>
-                @endforeach
-            @endforeach
-
-            <div class="flex justify-center">
-                <a href="{{ route('capaianPembelajaran.index') }}">
-                    <x-atoms.button.button-gray :customClass="'w-52 text-center rounded-lg px-5 py-3'" :type="'button'" :name="'Kembali'" />
-                </a>
-            </div>
+        <div class="mt-6 flex justify-center">
+            <a href="{{ route('capaianPembelajaran.index') }}">
+                <x-atoms.button.button-gray :customClass="'w-52 text-center rounded-lg px-5 py-3'" :type="'button'" :name="'Kembali'" />
+            </a>
         </div>
     </div>
 
-</x-layouts.app-dashboard>
+</x-app-dashboard>
