@@ -4,8 +4,6 @@
         <div class="flex flex-row items-center gap-4">
             <div class="flex flex-row gap-2">
                 <p class="text-base font-normal text-gray-900">{{ Auth::user()->fullname }}</p>
-                {{-- <span
-                    class="rounded-md bg-emerald-400 p-1 text-xs font-normal text-white">{{ Auth::user()->username }}</span> --}}
             </div>
 
             <div x-data="{ isOpen: false }">
