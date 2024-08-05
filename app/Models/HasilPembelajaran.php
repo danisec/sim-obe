@@ -2,16 +2,20 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class HasilPembelajaran extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
     protected $table = 'hasil_pembelajaran';
     protected $guarded = ['id_hasil_pembelajaran'];
     protected $primaryKey = 'id_hasil_pembelajaran';
+
+    protected $keyType = 'string';
+    public $incrementing = false;
 
     public function scopeFilter($query, array $filters)
     {
@@ -34,5 +38,10 @@ class HasilPembelajaran extends Model
     public function totalHasilPembelajaran()
     {
         return $this->hasOne(TotalHasilPembelajaran::class, 'id_hasil_pembelajaran', 'id_hasil_pembelajaran');
+    }
+
+    public function mataKuliah()
+    {
+        return $this->hasMany(MataKuliah::class, 'kode_mata_kuliah', 'kode_mata_kuliah');
     }
 }
