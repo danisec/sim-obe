@@ -12,6 +12,22 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('mapping_cpl', function (Blueprint $table) {
+            $table->foreign('kode_mata_kuliah', 'fk_kode_mata_kuliah_mata_kuliah')
+                ->references('kode_mata_kuliah')
+                ->on('mata_kuliah')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+        });
+
+        Schema::table('mapping_cpl', function (Blueprint $table) {
+            $table->foreign('nama_mata_kuliah', 'fk_nama_mata_kuliah_mata_kuliah')
+                ->references('nama_mata_kuliah')
+                ->on('mata_kuliah')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+        });
+
+        Schema::table('mapping_cpl', function (Blueprint $table) {
             $table->foreign('kode_cpl', 'fk_kode_cpl_kode_cpl')
                 ->references('kode_cpl')
                 ->on('capaian_pembelajaran_lulusan')
@@ -41,6 +57,12 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('mapping_cpl', function (Blueprint $table) {
+            $table->dropForeign('fk_kode_mata_kuliah_mata_kuliah');
+        });
+        Schema::table('mapping_cpl', function (Blueprint $table) {
+            $table->dropForeign('fk_nama_mata_kuliah_mata_kuliah');
+        });
         Schema::table('mapping_cpl', function (Blueprint $table) {
             $table->dropForeign('fk_kode_cpl_kode_cpl');
         });
