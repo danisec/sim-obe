@@ -12,10 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sub_capaian_pembelajaran_mata_kuliah', function (Blueprint $table) {
-            $table->id('id_scpmk');
-            $table->unsignedBigInteger('id_cpmk');
+            $table->uuid('id_scpmk')->primary();
+            $table->uuid('id_cpmk');
             $table->string('kode_scpmk', 19)->unique();
             $table->string('deskripsi_scpmk', 1000);
+            $table->string('kemampuan', 100);
+            $table->string('aspek', 100);
             $table->timestamps();
         });
     }
