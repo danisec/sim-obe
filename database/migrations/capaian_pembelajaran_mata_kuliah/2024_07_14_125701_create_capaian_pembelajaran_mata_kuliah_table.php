@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('capaian_pembelajaran_mata_kuliah', function (Blueprint $table) {
-            $table->id('id_cpmk');
-            $table->unsignedBigInteger('id_cpl');
+            $table->uuid('id_cpmk')->primary();
+            $table->uuid('id_cpl');
             $table->string('kode_cpmk', 15)->unique();
             $table->string('deskripsi_cpmk', 1000);
             $table->timestamps();
