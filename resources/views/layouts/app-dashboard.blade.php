@@ -1,15 +1,21 @@
 <x-app-layout title="{{ $title }}">
 
-    <x-organism.aside />
+    <div class="flex h-screen bg-gray-50" x-data="{ isSideMenuOpen: false }" :class="{ 'overflow-hidden': isSideMenuOpen }">
 
-    <main class="ease-soft-in-out relative h-full max-h-screen rounded-xl transition-all duration-200 xl:ml-64">
+        <x-aside />
 
-        <x-organism.navbar />
+        <div class="flex w-full flex-1 flex-col">
 
-        <div class="mx-auto w-full px-6 py-6">
-            {{ $slot }}
+            <x-organism.navbar />
+
+            <main class="h-full overflow-y-auto">
+                <div class="mx-auto p-6">
+                    {{ $slot }}
+                </div>
+            </main>
+
         </div>
 
-    </main>
+    </div>
 
 </x-app-layout>
