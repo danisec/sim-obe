@@ -4,7 +4,7 @@
         <li aria-current="page">
             <div class="flex items-center">
                 <x-atoms.svg.arrow-right />
-                <a class="ml-1 text-base font-medium text-gray-900 hover:text-blue-600"
+                <a class="ml-1 text-sm font-medium text-gray-900 hover:text-blue-600 md:text-base"
                     href="{{ route('capaianPembelajaran.index') }}">Data cpl-cpmk-scpmk</a>
             </div>
         </li>
@@ -12,14 +12,14 @@
         <li aria-current="page">
             <div class="flex items-center">
                 <x-atoms.svg.arrow-right />
-                <span class="mx-2 text-base font-medium text-gray-500">Import</span>
+                <span class="mx-2 text-sm font-medium text-gray-500 md:text-base">Import</span>
             </div>
         </li>
     </x-molecules.breadcrumb>
 
-    <div class="mx-auto my-8 w-8/12">
+    <div class="mx-auto my-8 w-full md:w-8/12">
         <div class="mb-8">
-            <h4 class="mb-6 text-2xl font-semibold text-gray-900">Download Template CPL-CPMK-SCPMK</h4>
+            <h4 class="mb-6 text-xl font-semibold text-gray-900 md:text-2xl">Download Template CPL-CPMK-SCPMK</h4>
 
             <div>
                 <a href="{{ asset('storage/template_cpl-cpmk-scpmk/template_cpl-cpmk-scpmk.xls') }}">
@@ -43,7 +43,7 @@
             </div>
         </div>
 
-        <h4 class="mb-6 text-2xl font-semibold text-gray-900">Import File CPL-CPMK-SCPMK</h4>
+        <h4 class="mb-6 text-xl font-semibold text-gray-900 md:text-2xl">Import File CPL-CPMK-SCPMK</h4>
 
         <form class="mt-8 space-y-6" action="{{ route('capaianPembelajaran.store') }}" method="POST"
             enctype="multipart/form-data">
