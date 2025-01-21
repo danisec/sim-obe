@@ -4,7 +4,7 @@
         <li aria-current="page">
             <div class="flex items-center">
                 <x-atoms.svg.arrow-right />
-                <a class="ml-1 text-base font-medium text-gray-900 hover:text-blue-600"
+                <a class="ml-1 text-sm font-medium text-gray-900 hover:text-blue-600 md:text-base"
                     href="{{ route('mappingCpl.index') }}">Hasil Pembelajaran</a>
             </div>
         </li>
@@ -12,14 +12,14 @@
         <li aria-current="page">
             <div class="flex items-center">
                 <x-atoms.svg.arrow-right />
-                <span class="mx-2 text-base font-medium text-gray-500">Detail Hasil Pembelajaran</span>
+                <span class="mx-2 text-sm font-medium text-gray-500 md:text-base">Detail Hasil Pembelajaran</span>
             </div>
         </li>
     </x-molecules.breadcrumb>
 
     <div class="mx-auto my-8 w-11/12">
 
-        <h4 class="mb-6 text-2xl font-semibold text-gray-900">Detail Hasil Pembelajaran
+        <h4 class="mb-6 text-xl font-semibold text-gray-900 md:text-2xl">Detail Hasil Pembelajaran
         </h4>
 
         <div class="mt-8 space-y-6">
@@ -46,7 +46,7 @@
                 <table class="w-full text-left text-base text-gray-900">
                     <thead class="bg-slate-100 text-sm uppercase text-gray-900">
                         <tr>
-                            <th class="px-6 py-3" scope="col">
+                            <th class="p-2 md:px-6 md:py-3" scope="col">
                                 Partisipasi Case Method
                             </th>
                             <th class="px-6 py-3" scope="col">
@@ -67,11 +67,12 @@
                         </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody class="text-sm text-gray-900 md:text-base">
                         @if ($hasilPembelajaran && $hasilPembelajaran->nilaiHasilPembelajaran)
                             @foreach ($hasilPembelajaran->nilaiHasilPembelajaran as $item)
                                 <tr class="border-b bg-white hover:bg-slate-100">
-                                    <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
+                                    <th class="whitespace-nowrap p-2 font-medium text-gray-900 md:px-6 md:py-4"
+                                        scope="row">
                                         {{ $item->partisipasi ?? '-' }}
                                     </th>
                                     <td class="px-6 py-4">
