@@ -67,4 +67,14 @@
         width: 1500px;
         height: 20px;
     }
+
+    /* Hidden display scroll */
+    .no-scrollbar::-webkit-scrollbar {
+    display: none;
+    }
+
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
 }
