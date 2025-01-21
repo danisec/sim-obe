@@ -4,13 +4,13 @@
         <li aria-current="page">
             <div class="flex items-center">
                 <x-atoms.svg.arrow-right />
-                <span class="mx-2 text-base font-medium text-gray-500">Profile</span>
+                <span class="mx-2 text-sm font-medium text-gray-500 md:text-base">Profile</span>
             </div>
         </li>
     </x-molecules.breadcrumb>
 
-    <div class="mx-auto my-8 w-11/12">
-        <h4 class="mb-6 text-2xl font-semibold text-gray-900">Akun dan Pengaturan</h4>
+    <div class="mx-auto my-8 w-full md:w-11/12">
+        <h4 class="mb-6 text-xl font-semibold text-gray-900 md:text-2xl">Akun dan Pengaturan</h4>
 
         <div class="mt-8 space-y-6 border-b border-slate-200 text-center text-sm font-medium text-gray-700">
             <ul class="flex flex-wrap">
@@ -25,7 +25,7 @@
             </ul>
         </div>
 
-        <div class="mt-8 space-y-6 rounded-md border border-slate-200 px-32 py-8">
+        <div class="mt-8 space-y-6 rounded-md border border-slate-200 px-8 py-8 md:px-32">
 
             <form class="-mt-6 space-y-6" action="{{ route('profile.update', $profile->id) }}" method="POST">
                 @method('PUT')
@@ -74,12 +74,13 @@
                     <label class="mb-2 block text-base font-medium text-gray-900" for="password">
                         Password</label>
 
-                    <div class="flex flex-row items-center justify-end">
+                    <div class="relative">
                         <input class="@error('password') border-red-500 @enderror field-input-slate w-full"
                             id="passwordInput" name="password" type="password" value="{{ old('password') }}"
                             placeholder="********">
 
-                        <button class="absolute mr-2.5" id="togglePasswordVisibility" type="button">
+                        <button class="absolute right-2 top-1/2 -translate-y-1/2 transform"
+                            id="togglePasswordVisibility" type="button">
                             <x-atoms.svg.eye id="eyeIcon" />
                         </button>
                     </div>
