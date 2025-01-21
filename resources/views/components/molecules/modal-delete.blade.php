@@ -4,8 +4,8 @@
     x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95"
     x-transition:enter-end="transform opacity-100 scale-100" x-cloak>
 
-    <div class="w-7/12 rounded-lg bg-white p-12 shadow-lg">
-        <h2 class="mb-1 text-2xl font-semibold">Konfirmasi</h2>
+    <div class="w-full rounded-lg bg-white p-8 shadow-lg md:w-7/12 md:p-12">
+        <h2 class="mb-1 text-xl font-semibold md:text-2xl">Konfirmasi</h2>
 
         <p class="text-base font-normal text-gray-900">{{ $title }}</p>
 
