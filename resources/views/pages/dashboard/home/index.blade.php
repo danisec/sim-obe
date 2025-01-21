@@ -1,11 +1,11 @@
 <x-app-dashboard title="{{ $title }}">
 
-    <div class="my-8">
-        <h4 class="mb-6 text-xl font-semibold text-gray-900">Predikat Capaian Pembelajaran Lulusan</h4>
+    <div>
+        <h4 class="mb-6 text-base font-semibold text-gray-900 md:text-xl">Predikat Capaian Pembelajaran Lulusan</h4>
     </div>
 
     <div class="relative overflow-x-auto rounded-lg shadow-sm">
-        <table class="w-full text-left text-base text-gray-900">
+        <table class="w-full text-left">
             <thead class="bg-slate-100 text-sm uppercase text-gray-900">
                 <tr>
                     <th class="px-6 py-3" scope="col">
@@ -20,7 +20,7 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody class="text-sm text-gray-900 md:text-base">
                 @foreach ($predikatCPL as $itemPredikat)
                     <tr class="border-b bg-white hover:bg-slate-100">
                         <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
@@ -39,12 +39,13 @@
     </div>
 
     <div class="my-8">
-        <h4 class="mb-6 text-xl font-semibold text-gray-900">Hasil Evaluasi CPL Berdasarkan Hasil Pembelajaran Mahasiswa
+        <h4 class="mb-6 text-base font-semibold text-gray-900 md:text-xl">Hasil Evaluasi CPL Berdasarkan Hasil
+            Pembelajaran Mahasiswa
         </h4>
     </div>
 
     <div class="relative overflow-x-auto rounded-lg shadow-sm">
-        <table class="w-full text-left text-base text-gray-900">
+        <table class="w-full text-left">
             <thead class="bg-slate-100 text-sm uppercase text-gray-900">
                 <tr>
                     <th class="px-6 py-3" scope="col">
@@ -68,7 +69,7 @@
                 </tr>
             </thead>
 
-            <tbody class="text-base text-gray-900">
+            <tbody class="text-sm text-gray-900 md:text-base">
                 @foreach ($cpl as $item)
                     @php
                         // Ambil nilai skor CPL
