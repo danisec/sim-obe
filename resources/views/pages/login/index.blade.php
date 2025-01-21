@@ -2,9 +2,9 @@
 
     <section class="bg-slate-50">
         <div class="mx-auto flex min-h-screen max-w-lg flex-col justify-center">
-            <div class="mb-8 flex items-center justify-center text-2xl font-semibold lg:mb-10">
+            <div class="mb-8 flex items-center justify-center font-semibold lg:mb-10">
                 <h3
-                    class="relative z-10 bg-gradient-to-tl from-blue-600 to-cyan-400 bg-clip-text font-bold text-transparent">
+                    class="relative z-10 bg-gradient-to-tl from-blue-600 to-cyan-400 bg-clip-text text-xl font-bold text-transparent md:text-2xl">
                     Sistem Informasi Manajemen OBE</h3>
             </div>
 
