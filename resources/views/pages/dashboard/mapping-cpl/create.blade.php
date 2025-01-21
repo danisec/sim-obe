@@ -4,7 +4,7 @@
         <li aria-current="page">
             <div class="flex items-center">
                 <x-atoms.svg.arrow-right />
-                <a class="ml-1 text-base font-medium text-gray-900 hover:text-blue-600"
+                <a class="ml-1 text-sm font-medium text-gray-900 hover:text-blue-600 md:text-base"
                     href="{{ route('mappingCpl.index') }}">Mapping Cpl</a>
             </div>
         </li>
@@ -12,14 +12,15 @@
         <li aria-current="page">
             <div class="flex items-center">
                 <x-atoms.svg.arrow-right />
-                <span class="mx-2 text-base font-medium text-gray-500">Tambah Mapping Cpl</span>
+                <span class="mx-2 text-sm font-medium text-gray-500 md:text-base">Tambah Mapping Cpl</span>
             </div>
         </li>
     </x-molecules.breadcrumb>
 
     <div class="mx-auto my-8 w-full">
 
-        <h4 class="mb-6 text-2xl font-semibold text-gray-900">Tambah Mapping Capaian Pembelajaran Lulusan Mata Kuliah
+        <h4 class="mb-6 text-xl font-semibold text-gray-900 md:text-2xl">Tambah Mapping Capaian Pembelajaran Lulusan Mata
+            Kuliah
         </h4>
 
         <form class="mt-8 space-y-6" action="{{ route('mappingCpl.store') }}" method="POST">
@@ -141,22 +142,23 @@
                         </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody class="text-sm text-gray-900 md:text-base">
                         <tr class="border-b bg-white hover:bg-slate-100">
-                            <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
+                            <th class="whitespace-nowrap px-2 py-2 font-medium text-gray-900 md:px-6 md:py-4"
+                                scope="row">
                                 Partisipasi / Case Method
                             </th>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 <input
-                                    class="@error('partisipasi') border-red-500 @enderror field-input-slate w-full capitalize"
+                                    class="@error('partisipasi') border-red-500 @enderror field-input-slate min-w-[250px] capitalize"
                                     id="inputBobotPartisipasi" name="partisipasi" type="number"
                                     value="{{ old('partisipasi') }}" placeholder="Bobot Partisipasi / Case Method"
                                     min="0" max="100" />
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 <input name="nama_indikator[]" type="hidden" value="partisipasi">
                                 <select
-                                    class="@error('indikator_kode_scpmk') border-red-500 @enderror field-input-slate indikatorKodeScpmk w-full"
+                                    class="@error('indikator_kode_scpmk') border-red-500 @enderror field-input-slate indikatorKodeScpmk min-w-[250px]"
                                     name="indikator_kode_scpmk[]">
 
                                     <option value="" selected disabled hidden>Pilih Kode SCPMK</option>
@@ -165,19 +167,20 @@
                         </tr>
 
                         <tr class="border-b bg-white hover:bg-slate-100">
-                            <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
+                            <th class="whitespace-nowrap px-2 py-2 font-medium text-gray-900 md:px-6 md:py-4"
+                                scope="row">
                                 Proyek / Problem Based Learning
                             </th>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 <input
-                                    class="@error('proyek') border-red-500 @enderror field-input-slate w-full capitalize"
+                                    class="@error('proyek') border-red-500 @enderror field-input-slate min-w-[250px] capitalize"
                                     id="inputBobotProyek" name="proyek" type="number" value="{{ old('proyek') }}"
                                     placeholder="Bobot Proyek / Problem Based Learning" min="0" max="100" />
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 <input name="nama_indikator[]" type="hidden" value="proyek">
                                 <select
-                                    class="@error('indikator_kode_scpmk') border-red-500 @enderror field-input-slate indikatorKodeScpmk w-full"
+                                    class="@error('indikator_kode_scpmk') border-red-500 @enderror field-input-slate indikatorKodeScpmk min-w-[250px]"
                                     name="indikator_kode_scpmk[]">
 
                                     <option value="" selected disabled hidden>Pilih Kode SCPMK</option>
@@ -186,19 +189,20 @@
                         </tr>
 
                         <tr class="border-b bg-white hover:bg-slate-100">
-                            <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
+                            <th class="whitespace-nowrap px-2 py-2 font-medium text-gray-900 md:px-6 md:py-4"
+                                scope="row">
                                 Tugas
                             </th>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 <input
-                                    class="@error('tugas') border-red-500 @enderror field-input-slate w-full capitalize"
+                                    class="@error('tugas') border-red-500 @enderror field-input-slate min-w-[250px] capitalize"
                                     id="inputBobotTugas" name="tugas" type="number" value="{{ old('tugas') }}"
                                     placeholder="Bobot Tugas" min="0" max="100" />
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 <input name="nama_indikator[]" type="hidden" value="tugas">
                                 <select
-                                    class="@error('indikator_kode_scpmk') border-red-500 @enderror field-input-slate indikatorKodeScpmk w-full"
+                                    class="@error('indikator_kode_scpmk') border-red-500 @enderror field-input-slate indikatorKodeScpmk min-w-[250px]"
                                     name="indikator_kode_scpmk[]">
 
                                     <option value="" selected disabled hidden>Pilih Kode SCPMK</option>
@@ -207,19 +211,20 @@
                         </tr>
 
                         <tr class="border-b bg-white hover:bg-slate-100">
-                            <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
+                            <th class="whitespace-nowrap px-2 py-2 font-medium text-gray-900 md:px-6 md:py-4"
+                                scope="row">
                                 Kuis
                             </th>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 <input
-                                    class="@error('kuis') border-red-500 @enderror field-input-slate w-full capitalize"
+                                    class="@error('kuis') border-red-500 @enderror field-input-slate min-w-[250px] capitalize"
                                     id="inputBobotKuis" name="kuis" type="number" value="{{ old('kuis') }}"
                                     placeholder="Bobot Kuis" min="0" max="100" />
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 <input name="nama_indikator[]" type="hidden" value="kuis">
                                 <select
-                                    class="@error('indikator_kode_scpmk') border-red-500 @enderror field-input-slate indikatorKodeScpmk w-full"
+                                    class="@error('indikator_kode_scpmk') border-red-500 @enderror field-input-slate indikatorKodeScpmk min-w-[250px]"
                                     name="indikator_kode_scpmk[]">
 
                                     <option value="" selected disabled hidden>Pilih Kode SCPMK</option>
@@ -228,21 +233,22 @@
                         </tr>
 
                         <tr class="border-b bg-white hover:bg-slate-100">
-                            <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
+                            <th class="whitespace-nowrap px-2 py-2 font-medium text-gray-900 md:px-6 md:py-4"
+                                scope="row">
                                 Ujian Tertulis (Evaluasi tengah semester)
                             </th>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 <input
-                                    class="@error('evaluasi_tengah_semester') border-red-500 @enderror field-input-slate w-full capitalize"
+                                    class="@error('evaluasi_tengah_semester') border-red-500 @enderror field-input-slate min-w-[250px] capitalize"
                                     id="inputBobotEvaluasiTengahSemester" name="evaluasi_tengah_semester"
                                     type="number" value="{{ old('evaluasi_tengah_semester') }}"
                                     placeholder="Bobot Ujian Tertulis (Evaluasi Tengah Semester)" min="0"
                                     max="100" />
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 <input name="nama_indikator[]" type="hidden" value="evaluasi_tengah_semester">
                                 <select
-                                    class="@error('indikator_kode_scpmk') border-red-500 @enderror field-input-slate indikatorKodeScpmk w-full"
+                                    class="@error('indikator_kode_scpmk') border-red-500 @enderror field-input-slate indikatorKodeScpmk min-w-[250px]"
                                     name="indikator_kode_scpmk[]">
 
                                     <option value="" selected disabled hidden>Pilih Kode SCPMK</option>
@@ -251,21 +257,22 @@
                         </tr>
 
                         <tr class="border-b bg-white hover:bg-slate-100">
-                            <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
+                            <th class="whitespace-nowrap px-2 py-2 font-medium text-gray-900 md:px-6 md:py-4"
+                                scope="row">
                                 Ujian Tertulis (Evaluasi Akhir semester)
                             </th>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 <input
-                                    class="@error('evaluasi_akhir_semester') border-red-500 @enderror field-input-slate w-full capitalize"
+                                    class="@error('evaluasi_akhir_semester') border-red-500 @enderror field-input-slate min-w-[250px] capitalize"
                                     id="inputBobotEvaluasiAkhirSemester" name="evaluasi_akhir_semester"
                                     type="number" value="{{ old('evaluasi_akhir_semester') }}"
                                     placeholder="Bobot Ujian Tertulis (Evaluasi Akhir Semester)" min="0"
                                     max="100" />
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 <input name="nama_indikator[]" type="hidden" value="evaluasi_akhir_semester">
                                 <select
-                                    class="@error('indikator_kode_scpmk') border-red-500 @enderror field-input-slate indikatorKodeScpmk w-full"
+                                    class="@error('indikator_kode_scpmk') border-red-500 @enderror field-input-slate indikatorKodeScpmk min-w-[250px]"
                                     name="indikator_kode_scpmk[]">
 
                                     <option value="" selected disabled hidden>Pilih Kode SCPMK</option>
@@ -277,15 +284,15 @@
                             <th class="whitespace-nowrap px-6 py-4 font-bold text-gray-900" scope="row">
                                 Total Bobot
                             </th>
-                            <td class="px-6 py-4">
-                                <input class="field-input-slate w-full" id="totalBobot" @readonly(true)
+                            <td class="px-1 py-2 md:px-6 md:py-4">
+                                <input class="field-input-slate min-w-[250px]" id="totalBobot" @readonly(true)
                                     @disabled(true) />
                             </td>
                         </tr>
                     </tbody>
                 </table>
 
-                <span class="font-base my-2 flex justify-end text-sm font-semibold text-gray-900">Nilai maksimal adalah
+                <span class="my-2 flex justify-end text-sm font-semibold text-gray-900">Nilai maksimal adalah
                     100%.</span>
             </div>
 
