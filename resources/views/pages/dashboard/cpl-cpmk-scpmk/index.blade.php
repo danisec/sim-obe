@@ -4,13 +4,13 @@
         <li aria-current="page">
             <div class="flex items-center">
                 <x-atoms.svg.arrow-right />
-                <span class="mx-2 text-base font-medium text-gray-500">Data cpl-cpmk-scpmk</span>
+                <span class="mx-2 text-sm font-medium text-gray-500 md:text-base">Data cpl-cpmk-scpmk</span>
             </div>
         </li>
     </x-molecules.breadcrumb>
 
     <div class="my-8">
-        <h4 class="mb-6 text-2xl font-semibold text-gray-900">Data CPL-CPMK-SCPMK</h4>
+        <h4 class="mb-6 text-xl font-semibold text-gray-900 md:text-2xl">Data CPL-CPMK-SCPMK</h4>
 
         <div class="flex flex-row items-center justify-end">
             <div>
@@ -22,7 +22,7 @@
     </div>
 
     <div class="relative overflow-x-auto rounded-lg shadow-sm">
-        <table class="w-full text-left text-base text-gray-900">
+        <table class="w-full text-left">
             <thead class="bg-slate-100 text-sm uppercase text-gray-900">
                 <tr>
                     <th class="px-6 py-3" scope="col">
@@ -39,7 +39,7 @@
 
             @if ($capaianPembelajaranLulusan != null && $capaianPembelajaranLulusan->count() > 0)
                 @foreach ($capaianPembelajaranLulusan as $item)
-                    <tbody>
+                    <tbody class="text-sm text-gray-900 md:text-base">
                         <tr class="border-b bg-white hover:bg-slate-100">
                             <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
                                 {{ $item->kode_cpl }}
