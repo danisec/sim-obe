@@ -1,17 +1,17 @@
 <?php
 
-namespace App\View\Components\organism;
+namespace App\View\Components;
 
 use Illuminate\View\Component;
 
 class Aside extends Component
 {
-    public $sideNavDashboard;
-    public $sideNav;
-
+    
     /**
      * Create a new component instance.
      */
+    public $sideNavDashboard;
+    public $sideNav;
     public function __construct()
     {
         $this->sideNavDashboard= [
@@ -27,7 +27,7 @@ class Aside extends Component
         ];
 
         $this->sideNav= [
-            'CPL - CPMK - SCPMK' => [
+            'CPL-CPMK-SCPMK' => [
                 'url' => 'data-cpl-cpmk-scpmk',
                 'viewBox' => '0 0 24 24',
                 'paths' => [
