@@ -22,9 +22,7 @@
     @if (Auth::check())
         {{ $slot }}
     @else
-        <main>
-            {{ $slot }}
-        </main>
+        {{ $slot }}
     @endif
 
     <x-notify::notify />
