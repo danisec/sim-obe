@@ -4,7 +4,7 @@
         <li aria-current="page">
             <div class="flex items-center">
                 <x-atoms.svg.arrow-right />
-                <a class="ml-1 text-base font-medium text-gray-900 hover:text-blue-600"
+                <a class="ml-1 text-sm font-medium text-gray-900 hover:text-blue-600 md:text-base"
                     href="{{ route('hasilPembelajaran.index') }}">Hasil Pembelajaran</a>
             </div>
         </li>
@@ -12,17 +12,18 @@
         <li aria-current="page">
             <div class="flex items-center">
                 <x-atoms.svg.arrow-right />
-                <span class="mx-2 text-base font-medium text-gray-500">Perhitungan Hasil Pembelajaran</span>
+                <span class="mx-2 text-sm font-medium text-gray-500 md:text-base">Perhitungan Hasil Pembelajaran</span>
             </div>
         </li>
     </x-molecules.breadcrumb>
 
     @foreach ($hasilPembelajaran as $itemHasilPembelajaran)
         <div class="my-8">
-            <h4 class="mb-6 text-xl font-semibold text-gray-900">{{ $itemHasilPembelajaran->nama_mata_kuliah }}</h4>
+            <h4 class="mb-6 text-lg font-semibold text-gray-900 md:text-xl">
+                {{ $itemHasilPembelajaran->nama_mata_kuliah }}</h4>
 
             <div class="relative overflow-x-auto rounded-lg shadow-sm">
-                <table class="w-full text-left text-base text-gray-900">
+                <table class="w-full text-left">
                     <thead class="bg-slate-100 text-sm uppercase text-gray-900">
                         <tr>
                             <th class="px-6 py-3" scope="col">
@@ -49,10 +50,11 @@
                         </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody class="text-sm text-gray-900 md:text-base">
                         @foreach ($itemHasilPembelajaran->nilaiHasilPembelajaran as $itemNilai)
                             <tr class="border-b bg-white hover:bg-slate-100">
-                                <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
+                                <th class="whitespace-nowrap p-2 font-medium text-gray-900 md:px-6 md:py-4"
+                                    scope="row">
                                     {{ '' }}
                                 </th>
                                 <td class="px-6 py-4">
@@ -104,13 +106,13 @@
             </div>
 
             <div class="relative overflow-x-auto rounded-lg shadow-sm">
-                <table class="my-8 w-full text-left text-base text-gray-900">
+                <table class="my-8 w-full text-left">
                     <thead class="bg-slate-100 text-sm uppercase text-gray-900">
                         <tr>
                             <th class="px-6 py-3" scope="col">
                                 Indikator
                             </th>
-                            <th class="px-6 py-3" scope="col">
+                            <th class="p-2 md:px-6 md:py-3" scope="col">
                                 Bobot (%)
                             </th>
                             <th class="px-6 py-3" scope="col">
@@ -125,7 +127,7 @@
                         </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody class="text-sm text-gray-900 md:text-base">
                         <tr class="border-b bg-white hover:bg-slate-100">
                             <th class="w-12 whitespace-nowrap bg-slate-100 px-6 py-4 font-medium text-gray-900"
                                 scope="row">
