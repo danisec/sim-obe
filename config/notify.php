@@ -14,6 +14,7 @@ return [
     */
 
     'theme' => env('NOTIFY_THEME', 'light'),
+    'position' => env('NOTIFY_POSITION', 'top-right'),
 
     /*
     |--------------------------------------------------------------------------
