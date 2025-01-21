@@ -4,7 +4,7 @@
         <li aria-current="page">
             <div class="flex items-center">
                 <x-atoms.svg.arrow-right />
-                <a class="ml-1 text-base font-medium text-gray-900 hover:text-blue-600"
+                <a class="ml-1 text-sm font-medium text-gray-900 hover:text-blue-600 md:text-base"
                     href="{{ route('capaianPembelajaran.index') }}">Data cpl-cpmk-scpmk</a>
             </div>
         </li>
@@ -12,14 +12,14 @@
         <li aria-current="page">
             <div class="flex items-center">
                 <x-atoms.svg.arrow-right />
-                <span class="mx-2 text-base font-medium text-gray-500">Detail cpl-cpmk-scpmk</span>
+                <span class="mx-2 text-sm font-medium text-gray-500 md:text-base">Detail cpl-cpmk-scpmk</span>
             </div>
         </li>
     </x-molecules.breadcrumb>
 
     <div class="mx-auto my-8 w-full">
 
-        <h4 class="mb-6 text-2xl font-semibold text-gray-900">Detail CPL-CPMK-SCPMK</h4>
+        <h4 class="mb-6 text-xl font-semibold text-gray-900 md:text-2xl">Detail CPL-CPMK-SCPMK</h4>
 
         <div id="wrapper-first-scroll">
             <div id="div-scroll">
@@ -30,8 +30,9 @@
             <table class="min-w-full border-collapse border border-gray-300">
                 <thead class="bg-slate-100 text-sm uppercase text-gray-900">
                     <tr>
-                        <th class="sticky left-0 border border-gray-300 bg-slate-100 px-6 py-3">Kode CPL</th>
-                        <th class="sticky left-[100px] border border-gray-300 bg-slate-100 px-6 py-3">Deskripsi CPL
+                        <th class="border border-gray-300 bg-slate-100 px-6 py-3 md:sticky md:left-0">Kode CPL</th>
+                        <th class="border border-gray-300 bg-slate-100 px-6 py-3 md:sticky md:left-[100px]">Deskripsi
+                            CPL
                         </th>
                         <th class="border border-gray-300 px-6 py-3">Kode CPMK</th>
                         <th class="border border-gray-300 px-6 py-3">Deskripsi CPMK</th>
@@ -43,7 +44,7 @@
                     </tr>
                 </thead>
 
-                <tbody class="text-base text-gray-900">
+                <tbody class="text-sm text-gray-900 md:text-base">
                     @php
                         $totalRowspan = 0;
                     @endphp
@@ -64,11 +65,11 @@
                         @foreach ($itemCPMK->subCapaianPembelajaranMataKuliah as $indexSCPMK => $itemSCPMK)
                             <tr class="bg-white hover:bg-slate-100">
                                 @if ($firstCPL)
-                                    <td class="sticky left-0 border border-gray-300 bg-white px-6 py-4"
+                                    <td class="border border-gray-300 bg-white px-6 py-4 md:sticky md:left-0"
                                         rowspan="{{ $totalRowspan }}">
                                         {{ $cplCpmkScpmk->kode_cpl }}
                                     </td>
-                                    <td class="sticky left-[100px] border border-gray-300 bg-white px-6 py-4"
+                                    <td class="border border-gray-300 bg-white px-6 py-4 md:sticky md:left-[100px]"
                                         rowspan="{{ $totalRowspan }}">
                                         {{ $cplCpmkScpmk->deskripsi_cpl }}
                                     </td>
