@@ -4,7 +4,7 @@
         <li aria-current="page">
             <div class="flex items-center">
                 <x-atoms.svg.arrow-right />
-                <a class="ml-1 text-base font-medium text-gray-900 hover:text-blue-600"
+                <a class="ml-1 text-sm font-medium text-gray-900 hover:text-blue-600 md:text-base"
                     href="{{ route('hasilPembelajaran.index') }}">Hasil Pembelajaran</a>
             </div>
         </li>
@@ -12,15 +12,16 @@
         <li aria-current="page">
             <div class="flex items-center">
                 <x-atoms.svg.arrow-right />
-                <span class="mx-2 text-base font-medium text-gray-500">Tambah Hasil Pembelajaran</span>
+                <span class="mx-2 text-sm font-medium text-gray-500 md:text-base">Tambah Hasil Pembelajaran</span>
             </div>
         </li>
     </x-molecules.breadcrumb>
 
-    <div class="mx-auto my-8 w-11/12">
+    <div class="mx-auto my-8 w-full md:w-11/12">
 
         <div class="mb-8">
-            <h4 class="mb-6 text-2xl font-semibold text-gray-900">Download Template Nilai Hasil Pembelajaran</h4>
+            <h4 class="mb-6 text-xl font-semibold text-gray-900 md:text-2xl">Download Template Nilai Hasil Pembelajaran
+            </h4>
 
             <div>
                 <a href="{{ asset('storage/template_nilai/template_nilai.xls') }}">
@@ -44,7 +45,7 @@
             </div>
         </div>
 
-        <h4 class="mb-6 text-2xl font-semibold text-gray-900">Tambah Hasil Pembelajaran
+        <h4 class="mb-6 text-xl font-semibold text-gray-900 md:text-2xl">Tambah Hasil Pembelajaran
         </h4>
 
         <form class="mt-8 space-y-6" action="{{ route('hasilPembelajaran.store') }}" method="POST"
