@@ -4,7 +4,7 @@
         <li aria-current="page">
             <div class="flex items-center">
                 <x-atoms.svg.arrow-right />
-                <a class="ml-1 text-base font-medium text-gray-900 hover:text-blue-600"
+                <a class="ml-1 text-sm font-medium text-gray-500 hover:text-blue-600 md:text-base"
                     href="{{ route('mappingCpl.index') }}">Mapping Cpl</a>
             </div>
         </li>
@@ -12,14 +12,15 @@
         <li aria-current="page">
             <div class="flex items-center">
                 <x-atoms.svg.arrow-right />
-                <span class="mx-2 text-base font-medium text-gray-500">Detail Mapping Cpl</span>
+                <span class="mx-2 text-sm font-medium text-gray-900 md:text-base">Detail Mapping Cpl</span>
             </div>
         </li>
     </x-molecules.breadcrumb>
 
-    <div class="mx-auto my-8 w-11/12">
+    <div class="mx-auto my-8 w-full md:w-11/12">
 
-        <h4 class="mb-6 text-2xl font-semibold text-gray-900">Detail Mapping Capaian Pembelajaran Lulusan Mata Kuliah
+        <h4 class="mb-6 text-xl font-semibold text-gray-900 md:text-2xl">Detail Mapping Capaian Pembelajaran Lulusan Mata
+            Kuliah
         </h4>
 
         <div class="mt-8 space-y-6">
@@ -90,15 +91,17 @@
 
                     <tbody>
                         <tr class="border-b bg-white hover:bg-slate-100">
-                            <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
+                            <th class="whitespace-nowrap px-2 py-2 font-medium text-gray-900 md:px-6 md:py-4"
+                                scope="row">
                                 Partisipasi / Case Method
                             </th>
-                            <td class="px-6 py-4">
-                                <input class="field-input-slate w-full capitalize" name="partisipasi" type="text"
+                            <td class="px-1 py-2 md:px-6 md:py-4">
+                                <input class="field-input-slate min-w-[250px] capitalize md:w-full" name="partisipasi"
+                                    type="text"
                                     value="{{ $mappingCpl->partisipasi ? $mappingCpl->partisipasi : '' }}"
                                     @disabled(true) @readonly(true) />
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 @php
                                     // Cek apakah ada item yang nama_indikator sama dengan 'partisipasi'
                                     $indikatorKinerja = $mappingCpl->indikatorKinerjaScpmk->firstWhere(
@@ -107,25 +110,26 @@
                                     );
                                 @endphp
 
-                                <input class="field-input-slate w-full capitalize" name="indikator_kode_scpmk"
-                                    type="text"
+                                <input class="field-input-slate min-w-[250px] capitalize md:w-full"
+                                    name="indikator_kode_scpmk" type="text"
                                     value="{{ $indikatorKinerja ? $indikatorKinerja->indikator_kode_scpmk : '' }}"
                                     @disabled(true) @readonly(true) />
                             </td>
                         </tr>
 
                         <tr class="border-b bg-white hover:bg-slate-100">
-                            <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
+                            <th class="whitespace-nowrap px-2 py-2 font-medium text-gray-900 md:px-6 md:py-4"
+                                scope="row">
                                 Proyek / Problem Based Learning
                             </th>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 <input
-                                    class="@error('proyek') border-red-500 @enderror field-input-slate w-full capitalize"
+                                    class="@error('proyek') border-red-500 @enderror field-input-slate min-w-[250px] capitalize md:w-full"
                                     name="proyek" type="text"
                                     value="{{ $mappingCpl->proyek ? $mappingCpl->proyek : '' }}"
                                     @disabled(true) @readonly(true) />
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 @php
                                     // Cek apakah ada item yang nama_indikator sama dengan 'proyek'
                                     $indikatorKinerja = $mappingCpl->indikatorKinerjaScpmk->firstWhere(
@@ -134,25 +138,26 @@
                                     );
                                 @endphp
 
-                                <input class="field-input-slate w-full capitalize" name="indikator_kode_scpmk"
-                                    type="text"
+                                <input class="field-input-slate min-w-[250px] capitalize md:w-full"
+                                    name="indikator_kode_scpmk" type="text"
                                     value="{{ $indikatorKinerja ? $indikatorKinerja->indikator_kode_scpmk : '' }}"
                                     @disabled(true) @readonly(true) />
                             </td>
                         </tr>
 
                         <tr class="border-b bg-white hover:bg-slate-100">
-                            <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
+                            <th class="whitespace-nowrap px-2 py-2 font-medium text-gray-900 md:px-6 md:py-4"
+                                scope="row">
                                 Tugas
                             </th>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 <input
-                                    class="@error('tugas') border-red-500 @enderror field-input-slate w-full capitalize"
+                                    class="@error('tugas') border-red-500 @enderror field-input-slate min-w-[250px] capitalize md:w-full"
                                     name="tugas" type="text"
                                     value="{{ $mappingCpl->tugas ? $mappingCpl->tugas : '' }}"
                                     @disabled(true) @readonly(true) />
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 @php
                                     // Cek apakah ada item yang nama_indikator sama dengan 'tugas'
                                     $indikatorKinerja = $mappingCpl->indikatorKinerjaScpmk->firstWhere(
@@ -161,25 +166,26 @@
                                     );
                                 @endphp
 
-                                <input class="field-input-slate w-full capitalize" name="indikator_kode_scpmk"
-                                    type="text"
+                                <input class="field-input-slate min-w-[250px] capitalize md:w-full"
+                                    name="indikator_kode_scpmk" type="text"
                                     value="{{ $indikatorKinerja ? $indikatorKinerja->indikator_kode_scpmk : '' }}"
                                     @disabled(true) @readonly(true) />
                             </td>
                         </tr>
 
                         <tr class="border-b bg-white hover:bg-slate-100">
-                            <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
+                            <th class="whitespace-nowrap px-2 py-2 font-medium text-gray-900 md:px-6 md:py-4"
+                                scope="row">
                                 Kuis
                             </th>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 <input
-                                    class="@error('kuis') border-red-500 @enderror field-input-slate w-full capitalize"
+                                    class="@error('kuis') border-red-500 @enderror field-input-slate min-w-[250px] capitalize md:w-full"
                                     name="kuis" type="text"
                                     value="{{ $mappingCpl->kuis ? $mappingCpl->kuis : '' }}"
                                     @disabled(true) @readonly(true) />
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 @php
                                     // Cek apakah ada item yang nama_indikator sama dengan 'kuis'
                                     $indikatorKinerja = $mappingCpl->indikatorKinerjaScpmk->firstWhere(
@@ -188,25 +194,26 @@
                                     );
                                 @endphp
 
-                                <input class="field-input-slate w-full capitalize" name="indikator_kode_scpmk"
-                                    type="text"
+                                <input class="field-input-slate min-w-[250px] capitalize md:w-full"
+                                    name="indikator_kode_scpmk" type="text"
                                     value="{{ $indikatorKinerja ? $indikatorKinerja->indikator_kode_scpmk : '' }}"
                                     @disabled(true) @readonly(true) />
                             </td>
                         </tr>
 
                         <tr class="border-b bg-white hover:bg-slate-100">
-                            <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
+                            <th class="whitespace-nowrap px-2 py-2 font-medium text-gray-900 md:px-6 md:py-4"
+                                scope="row">
                                 Ujian Tertulis (Evaluasi tengah semester)
                             </th>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 <input
-                                    class="@error('evaluasi_tengah_semester') border-red-500 @enderror field-input-slate w-full capitalize"
+                                    class="@error('evaluasi_tengah_semester') border-red-500 @enderror field-input-slate min-w-[250px] capitalize md:w-full"
                                     name="evaluasi_tengah_semester" type="text"
                                     value="{{ $mappingCpl->evaluasi_tengah_semester ? $mappingCpl->evaluasi_tengah_semester : '' }}"
                                     @disabled(true) @readonly(true) />
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 @php
                                     // Cek apakah ada item yang nama_indikator sama dengan 'evaluasi_tengah_semester'
                                     $indikatorKinerja = $mappingCpl->indikatorKinerjaScpmk->firstWhere(
@@ -215,25 +222,26 @@
                                     );
                                 @endphp
 
-                                <input class="field-input-slate w-full capitalize" name="indikator_kode_scpmk"
-                                    type="text"
+                                <input class="field-input-slate min-w-[250px] capitalize md:w-full"
+                                    name="indikator_kode_scpmk" type="text"
                                     value="{{ $indikatorKinerja ? $indikatorKinerja->indikator_kode_scpmk : '' }}"
                                     @disabled(true) @readonly(true) />
                             </td>
                         </tr>
 
                         <tr class="border-b bg-white hover:bg-slate-100">
-                            <th class="whitespace-nowrap px-6 py-4 font-medium text-gray-900" scope="row">
+                            <th class="whitespace-nowrap px-2 py-2 font-medium text-gray-900 md:px-6 md:py-4"
+                                scope="row">
                                 Ujian Tertulis (Evaluasi Akhir semester)
                             </th>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 <input
-                                    class="@error('evaluasi_akhir_semester') border-red-500 @enderror field-input-slate w-full capitalize"
+                                    class="@error('evaluasi_akhir_semester') border-red-500 @enderror field-input-slate min-w-[250px] capitalize md:w-full"
                                     name="evaluasi_akhir_semester" type="text"
                                     value="{{ $mappingCpl->evaluasi_akhir_semester ? $mappingCpl->evaluasi_akhir_semester : '' }}"
                                     @disabled(true) @readonly(true) />
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-1 py-2 md:px-6 md:py-4">
                                 @php
                                     // Cek apakah ada item yang nama_indikator sama dengan 'evaluasi_akhir_semester'
                                     $indikatorKinerja = $mappingCpl->indikatorKinerjaScpmk->firstWhere(
@@ -242,8 +250,8 @@
                                     );
                                 @endphp
 
-                                <input class="field-input-slate w-full capitalize" name="indikator_kode_scpmk"
-                                    type="text"
+                                <input class="field-input-slate min-w-[250px] capitalize md:w-full"
+                                    name="indikator_kode_scpmk" type="text"
                                     value="{{ $indikatorKinerja ? $indikatorKinerja->indikator_kode_scpmk : '' }}"
                                     @disabled(true) @readonly(true) />
                             </td>
