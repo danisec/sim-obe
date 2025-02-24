@@ -11,7 +11,7 @@ services:
     restart: unless-stopped
     working_dir: /var/www/
     volumes:
-      - ./:/var/www
+      - app_data:/var/www
     networks:
       - simobe
 
@@ -22,7 +22,7 @@ services:
     ports:
       - 8123:80
     volumes:
-      - ./:/var/www
+      - app_data:/var/www
       - ./docker-compose/nginx/conf.d/:/etc/nginx/conf.d/
     networks:
       - simobe
@@ -41,6 +41,7 @@ services:
     ports:
       - 3307:3306
     volumes:
+      - db_data:/var/lib/mysql
       - ./docker-compose/mysql:/docker-entrypoint-initdb.d
     networks:
       - simobe
@@ -58,6 +59,12 @@ services:
       PMA_ARBITRARY: 1
     networks:
       - simobe
+
+volumes:
+    app_data:
+      name: simobe_app_data
+    db_data:
+      name: simobe_db_data
 
 networks:
   simobe:
