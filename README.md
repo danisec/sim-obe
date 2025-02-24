@@ -1,6 +1,6 @@
 # Sitem Informasi Management Outcome-based Education (SIMOBE)
 
-## Table of Contents
+## 📌 Table of Contents
 
 -   [Features](#features)
 -   [Requirements](#requirements)
@@ -9,14 +9,14 @@
 -   [Project Structure](#project-structure)
 -   [Contributing](#contributing)
 
-## Features
+## 🚀 Features
 
 -   **Dashboard**
 -   **CPL-CPMK-SCPMK**
 -   **Mapping CPL**
 -   **Hasil Pembelajaran**
 
-## Requirements
+## 📋 Requirements
 
 -   PHP 8.1 or higher
 -   Composer
@@ -24,12 +24,16 @@
 -   MySQL
 -   Apache or Nginx
 
-## Installation
+## 🛠 Installation
+
+Follow these steps to set up the project:
 
 1. Clone the repository:
 
     ```bash
     git clone https://github.com/danisec/sim-obe.git
+
+    cd sim-obe
     ```
 
 2. Install dependencies:
@@ -40,20 +44,26 @@
     npm install && npm run build
     ```
 
-3. Create a new database and configure the `.env` file:
+3. Configure Environment Variables:
+
+    Copy the .env.example file and update it:
 
     ```bash
     cp .env.example .env
+    ```
+
+    Generate application key and storage link:
+
+    ```bash
+    php artisan key:generate
 
     php artisan storage:link
-
-    php artisan key:generate
     ```
 
 4. Set Up Database:
 
--   Create a database for the application.
--   Update the `.env` file with the database credentials.
+-   Create a new MySQL database.
+-   Update .env with your database credentials:
 
     ```bash
     DB_CONNECTION=mysql
@@ -64,16 +74,18 @@
     DB_PASSWORD=dbpassword
     ```
 
-5. Run the database migrations:
+5. Run Database Migrations
 
     ```bash
     php artisan migrate --seed
+
+    php artisan migrate --path="database/migrations/*"
     ```
 
-    or import manual file sql in folder database:
+    Or, manually import the SQL file:
 
     ```bash
-    database/sql/sim_obe.sql
+    mysql -u your_username -p your_password sim_obe < database/sql/sim_obe.sql
     ```
 
 6. Serve the application:
@@ -82,7 +94,7 @@
     php artisan serve
     ```
 
-## Usage
+## 🎯 Usage
 
 -   Access the application in your browser at `http://localhost:8000`.
 -   Login with the default credentials:
@@ -90,7 +102,7 @@
         -   Username: `admin`
         -   Password: `admin12345`
 
-## Project Structure
+## 📂 Project Structure
 
 -   **app/Http/Controllers**: Contains the controllers for handling HTTP requests.
 -   **app/Models**: Holds the Eloquent models.
@@ -98,6 +110,14 @@
 -   **resources/views**: Blade templates for the frontend.
 -   **routes/web.php**: Defines web routes for the application.
 
-## Contributing
+## 🤝 Contributing
 
-Contributions are welcome! Please fork the repository and submit a pull request with your changes. Ensure that your code follows the project’s coding standards.
+Contributions are welcome! To contribute:
+
+1. Fork the repository.
+2. Create a feature branch: git checkout -b feature-name
+3. Commit changes: git commit -m "feat: add new feature"
+4. Push to branch: git push origin feature-name
+5. Submit a pull request.
+
+Ensure your code follows the project’s coding standards before submission.
